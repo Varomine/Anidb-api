@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="unsafe-url">
+    <meta name="csrf-token" content="0xul0mf8G0NlNdCS1IiGFq0ryBOJvCNbtLn21ewN">
+
+    <title>Browse Anime — AniDB</title>
+    <meta name="description" content="Browse thousands of anime. Filter by genre, type, status, season, year, and more. Find your next favorite series.">
+    <meta name="keywords" content="watch anime online, anime streaming, HD anime, sub dub anime, AniDB">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Browse Anime — AniDB">
+    <meta property="og:description" content="Browse thousands of anime. Filter by genre, type, status, season, year, and more. Find your next favorite series.">
+    <meta property="og:image" content="https://anidb.app/og.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anidb.app/browse">
+    <meta property="og:site_name" content="AniDB">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Browse Anime — AniDB">
+    <meta name="twitter:description" content="Browse thousands of anime. Filter by genre, type, status, season, year, and more. Find your next favorite series.">
+    <meta name="twitter:image" content="https://anidb.app/og.jpg">
+
+    <link rel="icon" type="image/x-icon" href="https://anidb.app/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://anidb.app/images/fav-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://anidb.app/images/fav-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://anidb.app/images/fav-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://anidb.app/images/fav-180.png">
+
+    <link rel="canonical" href="https://anidb.app/browse">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <link rel="preload" as="style" href="https://anidb.app/build/assets/app-CGsagySl.css" /><link rel="modulepreload" href="https://anidb.app/build/assets/app-CcNNqum8.js" /><link rel="stylesheet" href="https://anidb.app/build/assets/app-CGsagySl.css" /><script type="module" src="https://anidb.app/build/assets/app-CcNNqum8.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8M7R50F5FF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8M7R50F5FF');
+    </script>
+
+    </head>
+<body class="bg-bg text-[#fafafa] min-h-screen antialiased">
+
+
+<nav x-data="navBar()" class="fixed top-0 left-0 right-0 z-50 border-b border-bd bg-bg/90 navbar-blur" x-cloak
+     @keydown.window.escape="genres=false; themes=false; types=false">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-16">
+
+            
+            <a href="/" class="flex items-center gap-2 flex-shrink-0 mr-6">
+                <img src="https://anidb.app/images/fav-512.png" alt="AniDB" class="w-8 h-8 rounded-lg">
+                <span class="text-lg font-bold tracking-tight">AniDB</span>
+            </a>
+
+            
+            <div class="hidden lg:flex items-center gap-1 flex-1">
+                <a href="/home" class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors">Home</a>
+                <a href="/browse" class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors">Browse</a>
+                <a href="/schedule" class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors">Schedule</a>
+
+                
+                <div class="relative">
+                    <button @click.stop="types=!types; genres=false; themes=false"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors flex items-center gap-1">
+                        Types
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="types && 'rotate-180'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <div x-show="types" @click.outside="types=false"
+                         x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+                         class="absolute left-0 top-full mt-1.5 min-w-[160px] bg-card border border-bd rounded-xl shadow-2xl shadow-black/60 py-1.5" style="display:none">
+                                                <a href="/browse?type=Movie" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">Movie</a>
+                                                <a href="/browse?type=Music" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">Music</a>
+                                                <a href="/browse?type=ONA" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">ONA</a>
+                                                <a href="/browse?type=OVA" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">OVA</a>
+                                                <a href="/browse?type=Special" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">Special</a>
+                                                <a href="/browse?type=TV" @click="types=false" class="block px-4 py-2 text-sm text-faint hover:text-white hover:bg-elevated transition-colors">TV</a>
+                                            </div>
+                </div>
+
+                
+                <div class="relative">
+                    <button @click.stop="genres=!genres; themes=false; types=false"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors flex items-center gap-1">
+                        Genres
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="genres && 'rotate-180'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <div x-show="genres" @click.outside="genres=false"
+                         x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-end="opacity-0 -translate-y-1"
+                         class="absolute left-0 top-full mt-1.5 w-[500px] bg-card border border-bd rounded-xl shadow-2xl shadow-black/60 p-4" style="display:none">
+                        <div class="grid grid-cols-3 gap-0.5 mb-3">
+                                                        <a href="/genres/5" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Comedy</a>
+                                                        <a href="/genres/1" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Action</a>
+                                                        <a href="/genres/4" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Fantasy</a>
+                                                        <a href="/genres/2" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Drama</a>
+                                                        <a href="/genres/14" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Romance</a>
+                                                        <a href="/genres/3" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Adventure</a>
+                                                        <a href="/genres/6" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Sci-Fi</a>
+                                                        <a href="/genres/10" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Supernatural</a>
+                                                        <a href="/genres/13" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Ecchi</a>
+                                                        <a href="/genres/7" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Mystery</a>
+                                                        <a href="/genres/9" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Slice of Life</a>
+                                                        <a href="/genres/18" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Suspense</a>
+                                                        <a href="/genres/11" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Sports</a>
+                                                        <a href="/genres/21" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Horror</a>
+                                                        <a href="/genres/12" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Award Winning</a>
+                                                        <a href="/genres/8" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Gourmet</a>
+                                                        <a href="/genres/20" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Girls Love</a>
+                                                        <a href="/genres/16" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Boys Love</a>
+                                                        <a href="/genres/19" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Avant Garde</a>
+                                                        <a href="/genres/17" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Erotica</a>
+                                                        <a href="/genres/15" @click="genres=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Hentai</a>
+                                                    </div>
+                        <div class="border-t border-bd pt-3">
+                            <a href="/genres" class="text-sm text-orange hover:text-orange-hover font-medium">View all genres →</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="relative">
+                    <button @click.stop="themes=!themes; genres=false; types=false"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-faint hover:text-white hover:bg-elevated transition-colors flex items-center gap-1">
+                        Themes
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="themes && 'rotate-180'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <div x-show="themes" @click.outside="themes=false"
+                         x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-end="opacity-0 -translate-y-1"
+                         class="absolute left-0 top-full mt-1.5 w-[500px] bg-card border border-bd rounded-xl shadow-2xl shadow-black/60 p-4" style="display:none">
+                        <div class="grid grid-cols-3 gap-0.5 mb-3">
+                                                        <a href="/themes/6" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">School</a>
+                                                        <a href="/themes/13" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Adult Cast</a>
+                                                        <a href="/themes/23" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Mecha</a>
+                                                        <a href="/themes/24" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Historical</a>
+                                                        <a href="/themes/12" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Harem</a>
+                                                        <a href="/themes/10" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Military</a>
+                                                        <a href="/themes/1" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Super Power</a>
+                                                        <a href="/themes/9" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Isekai</a>
+                                                        <a href="/themes/19" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Music</a>
+                                                        <a href="/themes/4" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Mythology</a>
+                                                        <a href="/themes/20" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Psychological</a>
+                                                        <a href="/themes/3" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Parody</a>
+                                                        <a href="/themes/35" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">CGDCT</a>
+                                                        <a href="/themes/44" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Space</a>
+                                                        <a href="/themes/42" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Gore</a>
+                                                        <a href="/themes/27" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Urban Fantasy</a>
+                                                        <a href="/themes/38" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Gag Humor</a>
+                                                        <a href="/themes/39" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Martial Arts</a>
+                                                        <a href="/themes/34" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Anthropomorphic</a>
+                                                        <a href="/themes/47" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Iyashikei</a>
+                                                        <a href="/themes/16" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Workplace</a>
+                                                        <a href="/themes/40" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Detective</a>
+                                                        <a href="/themes/41" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Mahou Shoujo</a>
+                                                        <a href="/themes/7" @click="themes=false" class="px-3 py-2 text-sm text-faint hover:text-white hover:bg-elevated rounded-lg transition-colors truncate">Reincarnation</a>
+                                                    </div>
+                        <div class="border-t border-bd pt-3">
+                            <a href="/themes" class="text-sm text-orange hover:text-orange-hover font-medium">View all themes →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="flex items-center gap-2">
+                
+                <div class="hidden md:block relative" x-data="searchBar()">
+                    <div class="relative">
+                        <input type="text" placeholder="Search anime..." x-model="q"
+                               @input.debounce.300ms="search()"
+                               @keydown.escape="close()"
+                               @keydown.arrow-down.prevent="moveDown()"
+                               @keydown.arrow-up.prevent="moveUp()"
+                               @keydown.enter.prevent="selectActive()"
+                               @focus="if(urls.length) open=true"
+                               class="inp pl-9 pr-4 py-2 text-sm w-60 lg:w-72 rounded-xl">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                    <div x-show="open" @click.outside="close()"
+                         x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                         class="absolute right-0 top-full mt-1.5 w-80 bg-card border border-bd rounded-xl shadow-2xl shadow-black/70 overflow-hidden z-50" style="display:none">
+                        <div class="max-h-72 overflow-y-auto" x-ref="results" x-html="html"></div>
+                        <a :href="'/browse?q='+encodeURIComponent(q)"
+                           class="flex items-center justify-between px-4 py-2.5 text-xs text-orange hover:bg-elevated border-t border-bd font-medium transition-colors">
+                            <span>Show more results for "<span x-text="q"></span>"</span>
+                            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                
+                <button @click="mob=!mob" class="md:hidden p-2 rounded-lg text-faint hover:text-white hover:bg-elevated transition-colors">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+
+                <div class="hidden sm:flex items-center gap-2">
+            <a href="https://anidb.app/login" class="btn-secondary px-3 py-2">Log in</a>
+            <a href="https://anidb.app/register" class="btn-primary px-3 py-2">Register</a>
+        </div>
+    
+                
+                <button @click="menu=!menu" class="lg:hidden p-2 rounded-lg text-faint hover:text-white hover:bg-elevated transition-colors">
+                    <svg x-show="!menu" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg x-show="menu" class="w-5 h-5" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+
+        
+        <div x-show="mob" x-data="searchBar()" x-transition class="md:hidden pb-3" style="display:none">
+            <div class="relative">
+                <input type="text" placeholder="Search anime..." x-model="q"
+                       @input.debounce.300ms="search()"
+                       @keydown.enter.prevent="selectActive()"
+                       @keydown.arrow-down.prevent="moveDown()"
+                       @keydown.arrow-up.prevent="moveUp()"
+                       class="inp pl-9 py-2 text-sm rounded-xl">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <div x-show="open" class="mt-1.5 bg-card border border-bd rounded-xl overflow-hidden">
+                <div x-ref="results" x-html="html"></div>
+                <a :href="'/browse?q='+encodeURIComponent(q)"
+                   class="flex items-center justify-between px-4 py-2.5 text-xs text-orange hover:bg-elevated border-t border-bd font-medium transition-colors">
+                    <span>Show more results</span>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg>
+                </a>
+            </div>
+        </div>
+
+        
+        <div x-show="menu" x-transition class="lg:hidden border-t border-bd py-4 space-y-4" style="display:none">
+            <div class="border-t border-bd pt-4 px-3 flex gap-2">
+            <a href="https://anidb.app/login" class="btn-secondary flex-1 justify-center">Log in</a>
+            <a href="https://anidb.app/register" class="btn-primary flex-1 justify-center">Register</a>
+        </div>
+    
+            <div class="space-y-1">
+                <a href="/home" class="block px-3 py-2 rounded-lg text-sm text-faint hover:text-white hover:bg-elevated">Home</a>
+                <a href="/browse" class="block px-3 py-2 rounded-lg text-sm text-faint hover:text-white hover:bg-elevated">Browse</a>
+                <a href="/schedule" class="block px-3 py-2 rounded-lg text-sm text-faint hover:text-white hover:bg-elevated">Schedule</a>
+                <a href="/genres" class="block px-3 py-2 rounded-lg text-sm text-faint hover:text-white hover:bg-elevated">All Genres</a>
+                <a href="/themes" class="block px-3 py-2 rounded-lg text-sm text-faint hover:text-white hover:bg-elevated">All Themes</a>
+            </div>
+            <div>
+                <p class="px-3 text-xs font-semibold text-muted uppercase tracking-wider mb-2">Types</p>
+                <div class="flex flex-wrap gap-1.5 px-3">
+                                        <a href="/browse?type=Movie" class="filter-chip">Movie</a>
+                                        <a href="/browse?type=Music" class="filter-chip">Music</a>
+                                        <a href="/browse?type=ONA" class="filter-chip">ONA</a>
+                                        <a href="/browse?type=OVA" class="filter-chip">OVA</a>
+                                        <a href="/browse?type=Special" class="filter-chip">Special</a>
+                                        <a href="/browse?type=TV" class="filter-chip">TV</a>
+                                    </div>
+            </div>
+            <div>
+                <p class="px-3 text-xs font-semibold text-muted uppercase tracking-wider mb-2">Popular Genres</p>
+                <div class="flex flex-wrap gap-1.5 px-3">
+                                        <a href="/genres/5" class="filter-chip">Comedy</a>
+                                        <a href="/genres/1" class="filter-chip">Action</a>
+                                        <a href="/genres/4" class="filter-chip">Fantasy</a>
+                                        <a href="/genres/2" class="filter-chip">Drama</a>
+                                        <a href="/genres/14" class="filter-chip">Romance</a>
+                                        <a href="/genres/3" class="filter-chip">Adventure</a>
+                                        <a href="/genres/6" class="filter-chip">Sci-Fi</a>
+                                        <a href="/genres/10" class="filter-chip">Supernatural</a>
+                                        <a href="/genres/13" class="filter-chip">Ecchi</a>
+                                        <a href="/genres/7" class="filter-chip">Mystery</a>
+                                        <a href="/genres/9" class="filter-chip">Slice of Life</a>
+                                        <a href="/genres/18" class="filter-chip">Suspense</a>
+                                    </div>
+            </div>
+            <div>
+                <p class="px-3 text-xs font-semibold text-muted uppercase tracking-wider mb-2">Popular Themes</p>
+                <div class="flex flex-wrap gap-1.5 px-3">
+                                        <a href="/themes/6" class="filter-chip">School</a>
+                                        <a href="/themes/13" class="filter-chip">Adult Cast</a>
+                                        <a href="/themes/23" class="filter-chip">Mecha</a>
+                                        <a href="/themes/24" class="filter-chip">Historical</a>
+                                        <a href="/themes/12" class="filter-chip">Harem</a>
+                                        <a href="/themes/10" class="filter-chip">Military</a>
+                                        <a href="/themes/1" class="filter-chip">Super Power</a>
+                                        <a href="/themes/9" class="filter-chip">Isekai</a>
+                                        <a href="/themes/19" class="filter-chip">Music</a>
+                                        <a href="/themes/4" class="filter-chip">Mythology</a>
+                                        <a href="/themes/20" class="filter-chip">Psychological</a>
+                                        <a href="/themes/3" class="filter-chip">Parody</a>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+function navBar() {
+    return { genres: false, themes: false, types: false, menu: false, mob: false };
+}
+function searchBar() {
+    return {
+        q: '', html: '', urls: [], open: false, activeIndex: -1,
+        close() { this.open = false; this.activeIndex = -1; },
+        _syncActive() {
+            const items = Array.from(this.$refs.results?.querySelectorAll('[data-search-item]') ?? []);
+            items.forEach((el, i) => el.classList.toggle('bg-elevated', i === this.activeIndex));
+            if (this.activeIndex >= 0) items[this.activeIndex]?.scrollIntoView({ block: 'nearest' });
+        },
+        moveDown() {
+            if (!this.open || !this.urls.length) return;
+            this.activeIndex = Math.min(this.activeIndex + 1, this.urls.length - 1);
+            this._syncActive();
+        },
+        moveUp() {
+            if (!this.urls.length) return;
+            this.activeIndex = Math.max(this.activeIndex - 1, -1);
+            this._syncActive();
+        },
+        selectActive() {
+            if (this.activeIndex >= 0 && this.urls[this.activeIndex]) {
+                window.location.href = this.urls[this.activeIndex];
+            } else if (this.q.trim()) {
+                window.location.href = '/browse?q=' + encodeURIComponent(this.q);
+            }
+        },
+        async search() {
+            this.activeIndex = -1;
+            if (this.q.length < 2) { this.html = ''; this.urls = []; this.open = false; return; }
+            const res = await fetch('/search/suggestions?q=' + encodeURIComponent(this.q));
+            if (res.status === 204) { this.html = ''; this.urls = []; this.open = false; return; }
+            this.html = await res.text();
+            const tmp = document.createElement('div');
+            tmp.innerHTML = this.html;
+            this.urls = Array.from(tmp.querySelectorAll('[data-search-item]')).map(el => el.getAttribute('href'));
+            this.open = this.urls.length > 0;
+        }
+    };
+}
+</script>
+
+<main class="pt-16">
+    
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
+
+    
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Browse Anime</h1>
+            <p class="text-sm text-muted mt-0.5">6,393 results</p>
+        </div>
+    </div>
+
+    
+    <form method="GET" action="/browse" id="browse-form"
+          class="flex flex-wrap items-center gap-2 mb-6 p-3 bg-card border border-bd rounded-xl">
+
+                        
+        
+        <div class="relative flex-1 min-w-[160px]">
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" name="q" value="" placeholder="Search title..."
+                   class="inp pl-8 text-sm py-2 w-full"
+                   onkeydown="if(event.key==='Enter'){this.form.submit()}">
+        </div>
+
+        
+        <select name="type" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+            <option value="">All Types</option>
+                        <option value="Movie" >Movie</option>
+                        <option value="Music" >Music</option>
+                        <option value="ONA" >ONA</option>
+                        <option value="OVA" >OVA</option>
+                        <option value="Special" >Special</option>
+                        <option value="TV" >TV</option>
+                    </select>
+
+        
+        <select name="status" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+            <option value="">All Status</option>
+                        <option value="Currently Airing" >Currently Airing</option>
+                        <option value="Finished Airing" >Finished Airing</option>
+                    </select>
+
+        
+        <select name="season" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+            <option value="">All Seasons</option>
+                        <option value="fall" >Fall</option>
+                        <option value="spring" >Spring</option>
+                        <option value="summer" >Summer</option>
+                        <option value="winter" >Winter</option>
+                    </select>
+
+        
+        <select name="year" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+            <option value="">All Years</option>
+                        <option value="2026" >2026</option>
+                        <option value="2025" >2025</option>
+                        <option value="2024" >2024</option>
+                        <option value="2023" >2023</option>
+                        <option value="2022" >2022</option>
+                        <option value="2021" >2021</option>
+                        <option value="2020" >2020</option>
+                        <option value="2019" >2019</option>
+                        <option value="2018" >2018</option>
+                        <option value="2017" >2017</option>
+                        <option value="2016" >2016</option>
+                        <option value="2015" >2015</option>
+                        <option value="2014" >2014</option>
+                        <option value="2013" >2013</option>
+                        <option value="2012" >2012</option>
+                        <option value="2011" >2011</option>
+                        <option value="2010" >2010</option>
+                        <option value="2009" >2009</option>
+                        <option value="2008" >2008</option>
+                        <option value="2007" >2007</option>
+                        <option value="2006" >2006</option>
+                        <option value="2005" >2005</option>
+                        <option value="2004" >2004</option>
+                        <option value="2003" >2003</option>
+                        <option value="2002" >2002</option>
+                        <option value="2001" >2001</option>
+                        <option value="2000" >2000</option>
+                        <option value="1999" >1999</option>
+                        <option value="1998" >1998</option>
+                        <option value="1997" >1997</option>
+                        <option value="1996" >1996</option>
+                        <option value="1995" >1995</option>
+                        <option value="1994" >1994</option>
+                        <option value="1993" >1993</option>
+                        <option value="1992" >1992</option>
+                        <option value="1991" >1991</option>
+                        <option value="1990" >1990</option>
+                        <option value="1989" >1989</option>
+                        <option value="1988" >1988</option>
+                        <option value="1987" >1987</option>
+                        <option value="1986" >1986</option>
+                        <option value="1985" >1985</option>
+                        <option value="1984" >1984</option>
+                        <option value="1983" >1983</option>
+                        <option value="1982" >1982</option>
+                        <option value="1981" >1981</option>
+                        <option value="1980" >1980</option>
+                        <option value="1979" >1979</option>
+                        <option value="1978" >1978</option>
+                        <option value="1977" >1977</option>
+                        <option value="1976" >1976</option>
+                        <option value="1975" >1975</option>
+                        <option value="1974" >1974</option>
+                        <option value="1973" >1973</option>
+                        <option value="1972" >1972</option>
+                        <option value="1971" >1971</option>
+                        <option value="1970" >1970</option>
+                        <option value="1969" >1969</option>
+                        <option value="1968" >1968</option>
+                        <option value="1925" >1925</option>
+                    </select>
+
+        
+        <select name="genres" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+            <option value="">All Genres</option>
+                        <option value="1" >Action</option>
+                        <option value="3" >Adventure</option>
+                        <option value="19" >Avant Garde</option>
+                        <option value="12" >Award Winning</option>
+                        <option value="16" >Boys Love</option>
+                        <option value="5" >Comedy</option>
+                        <option value="2" >Drama</option>
+                        <option value="13" >Ecchi</option>
+                        <option value="17" >Erotica</option>
+                        <option value="4" >Fantasy</option>
+                        <option value="20" >Girls Love</option>
+                        <option value="8" >Gourmet</option>
+                        <option value="15" >Hentai</option>
+                        <option value="21" >Horror</option>
+                        <option value="7" >Mystery</option>
+                        <option value="14" >Romance</option>
+                        <option value="6" >Sci-Fi</option>
+                        <option value="9" >Slice of Life</option>
+                        <option value="11" >Sports</option>
+                        <option value="10" >Supernatural</option>
+                        <option value="18" >Suspense</option>
+                    </select>
+
+        
+        <select name="sort" onchange="this.form.submit()" class="inp text-sm py-2 w-auto">
+                        <option value="order_trending" selected>Trending</option>
+                        <option value="order_top" >Top Rated</option>
+                        <option value="order_updated" >Latest Updated</option>
+                        <option value="order_popular" >Most Popular</option>
+                        <option value="order_favorite" >Most Favorited</option>
+                        <option value="order_top_airing" >Top Airing</option>
+                        <option value="title" >Title A-Z</option>
+                        <option value="aired_start" >Newest First</option>
+                    </select>
+
+        
+                
+    </form>
+
+    
+    
+    
+    <div class="anime-grid">
+                <a href="https://anidb.app/anime/one-piece-3880" class="anime-card block group" title="One Piece">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/3880.jpg" alt="One Piece" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.7
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">One Piece</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">One Piece</p>
+</a>
+                <a href="https://anidb.app/anime/mushoku-tensei-jobless-reincarnation-season-3-3570" class="anime-card block group" title="Mushoku Tensei: Jobless Reincarnation Season 3">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783663814/3570.jpg" alt="Mushoku Tensei: Jobless Reincarnation Season 3" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.7
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Mushoku Tensei: Jobless Reincarnation Season 3</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Mushoku Tensei: Jobless Reincarnation Season 3</p>
+</a>
+                <a href="https://anidb.app/anime/that-time-i-got-reincarnated-as-a-slime-season-4-5238" class="anime-card block group" title="That Time I Got Reincarnated as a Slime Season 4">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/5238.jpg" alt="That Time I Got Reincarnated as a Slime Season 4" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.1
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">That Time I Got Reincarnated as a Slime Season 4</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">That Time I Got Reincarnated as a Slime Season 4</p>
+</a>
+                <a href="https://anidb.app/anime/bleach-thousand-year-blood-war-the-calamity-6378" class="anime-card block group" title="Bleach: Thousand-Year Blood War - The Calamity">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6378.jpg" alt="Bleach: Thousand-Year Blood War - The Calamity" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                9.0
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Bleach: Thousand-Year Blood War - The Calamity</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Bleach: Thousand-Year Blood War - The Calamity</p>
+</a>
+                <a href="https://anidb.app/anime/bleach-670" class="anime-card block group" title="Bleach">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/670.jpg" alt="Bleach" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.0
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Bleach</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Bleach</p>
+</a>
+                <a href="https://anidb.app/anime/what-she-fell-on-was-the-tip-of-my-dick-6080" class="anime-card block group" title="What She Fell on Was the Tip of My Dick">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6080.jpg" alt="What She Fell on Was the Tip of My Dick" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">ONA</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.6
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">What She Fell on Was the Tip of My Dick</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">What She Fell on Was the Tip of My Dick</p>
+</a>
+                <a href="https://anidb.app/anime/the-worlds-strongest-rearguard-6438" class="anime-card block group" title="The World&#039;s Strongest Rearguard">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783275016/6438.jpg" alt="The World&#039;s Strongest Rearguard" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                5.8
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">The World&#039;s Strongest Rearguard</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">The World&#039;s Strongest Rearguard</p>
+</a>
+                <a href="https://anidb.app/anime/my-hero-academia-i-am-a-hero-too-6425" class="anime-card block group" title="My Hero Academia: I Am a Hero Too">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6425.jpg" alt="My Hero Academia: I Am a Hero Too" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">ONA</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.4
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">My Hero Academia: I Am a Hero Too</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">My Hero Academia: I Am a Hero Too</p>
+</a>
+                <a href="https://anidb.app/anime/black-clover-641" class="anime-card block group" title="Black Clover">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/641.jpg" alt="Black Clover" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.1
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Black Clover</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Black Clover</p>
+</a>
+                <a href="https://anidb.app/anime/daemons-of-the-shadow-realm-1140" class="anime-card block group" title="Daemons of the Shadow Realm">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/1140.jpg" alt="Daemons of the Shadow Realm" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.9
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Daemons of the Shadow Realm</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Daemons of the Shadow Realm</p>
+</a>
+                <a href="https://anidb.app/anime/from-overshadowed-to-overpowered-second-reincarnation-of-a-talentless-sage-6414" class="anime-card block group" title="From Overshadowed to Overpowered: Second Reincarnation of a Talentless Sage">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6414.jpg" alt="From Overshadowed to Overpowered: Second Reincarnation of a Talentless Sage" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.6
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">From Overshadowed to Overpowered: Second Reincarnation of a Talentless Sage</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">From Overshadowed to Overpowered: Second Reincarnation of a Talentless Sage</p>
+</a>
+                <a href="https://anidb.app/anime/though-i-am-an-inept-villainess-6404" class="anime-card block group" title="Though I Am an Inept Villainess">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783901414/6404.jpg" alt="Though I Am an Inept Villainess" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.9
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Though I Am an Inept Villainess</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Though I Am an Inept Villainess</p>
+</a>
+                <a href="https://anidb.app/anime/hell-mode-the-hardcore-gamer-dominates-in-another-world-with-garbage-balancing-season-2-6395" class="anime-card block group" title="Hell Mode: The Hardcore Gamer Dominates in Another World with Garbage Balancing Season 2">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6395.jpg" alt="Hell Mode: The Hardcore Gamer Dominates in Another World with Garbage Balancing Season 2" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.2
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Hell Mode: The Hardcore Gamer Dominates in Another World with Garbage Balancing Season 2</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Hell Mode: The Hardcore Gamer Dominates in Another World with Garbage Balancing Season 2</p>
+</a>
+                <a href="https://anidb.app/anime/the-100-girlfriends-who-really-really-really-really-really-love-you-season-3-6386" class="anime-card block group" title="The 100 Girlfriends Who Really, Really, Really, Really, Really Love You Season 3">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/6386.jpg" alt="The 100 Girlfriends Who Really, Really, Really, Really, Really Love You Season 3" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.1
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">The 100 Girlfriends Who Really, Really, Really, Really, Really Love You Season 3</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">The 100 Girlfriends Who Really, Really, Really, Really, Really Love You Season 3</p>
+</a>
+                <a href="https://anidb.app/anime/black-torch-6377" class="anime-card block group" title="Black Torch">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783188629/6377.jpg" alt="Black Torch" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.2
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Black Torch</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Black Torch</p>
+</a>
+                <a href="https://anidb.app/anime/simple-yet-sexy-4819" class="anime-card block group" title="Simple yet Sexy">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/4819.jpg" alt="Simple yet Sexy" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">ONA</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.4
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Simple yet Sexy</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Simple yet Sexy</p>
+</a>
+                <a href="https://anidb.app/anime/rich-girl-caretaker-im-secretly-the-caregiver-of-the-most-popular-girl-in-this-rich-kid-school-6400" class="anime-card block group" title="Rich Girl Caretaker: I&#039;m Secretly the Caregiver of the Most Popular Girl in This Rich Kid School">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783210219/6400.jpg" alt="Rich Girl Caretaker: I&#039;m Secretly the Caregiver of the Most Popular Girl in This Rich Kid School" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.3
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Rich Girl Caretaker: I&#039;m Secretly the Caregiver of the Most Popular Girl in This Rich Kid School</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Rich Girl Caretaker: I&#039;m Secretly the Caregiver of the Most Popular Girl in This Rich Kid School</p>
+</a>
+                <a href="https://anidb.app/anime/overflow-4006" class="anime-card block group" title="Overflow">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/4006.jpg" alt="Overflow" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">ONA</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.2
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Overflow</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Overflow</p>
+</a>
+                <a href="https://anidb.app/anime/the-exiled-heavy-knight-knows-how-to-game-the-system-6388" class="anime-card block group" title="The Exiled Heavy Knight Knows How to Game the System">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783015814/6388.jpg" alt="The Exiled Heavy Knight Knows How to Game the System" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.8
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">The Exiled Heavy Knight Knows How to Game the System</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">The Exiled Heavy Knight Knows How to Game the System</p>
+</a>
+                <a href="https://anidb.app/anime/i-became-a-legend-after-my-10-year-long-last-stand-6396" class="anime-card block group" title="I Became a Legend After My 10 Year-Long Last Stand.">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783102214/6396.jpg" alt="I Became a Legend After My 10 Year-Long Last Stand." loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.6
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">I Became a Legend After My 10 Year-Long Last Stand.</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">I Became a Legend After My 10 Year-Long Last Stand.</p>
+</a>
+                <a href="https://anidb.app/anime/naruto-3686" class="anime-card block group" title="Naruto">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/3686.jpg" alt="Naruto" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.0
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Naruto</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Naruto</p>
+</a>
+                <a href="https://anidb.app/anime/naruto-shippuden-3687" class="anime-card block group" title="Naruto Shippuden">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/3687.jpg" alt="Naruto Shippuden" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.3
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Naruto Shippuden</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Naruto Shippuden</p>
+</a>
+                <a href="https://anidb.app/anime/do-you-like-big-girls-1288" class="anime-card block group" title="Do You Like Big Girls?">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/1288.jpg" alt="Do You Like Big Girls?" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">ONA</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.4
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Do You Like Big Girls?</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Do You Like Big Girls?</p>
+</a>
+                <a href="https://anidb.app/anime/the-ogres-bride-6436" class="anime-card block group" title="The Ogre&#039;s Bride">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1785003012/6436.jpg" alt="The Ogre&#039;s Bride" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.1
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">The Ogre&#039;s Bride</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">The Ogre&#039;s Bride</p>
+</a>
+                <a href="https://anidb.app/anime/hunter-x-hunter-2011-2294" class="anime-card block group" title="Hunter x Hunter (2011)">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1782735600/2294.jpg" alt="Hunter x Hunter (2011)" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                9.0
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Hunter x Hunter (2011)</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Hunter x Hunter (2011)</p>
+</a>
+                <a href="https://anidb.app/anime/you-and-i-are-polar-opposites-season-2-6391" class="anime-card block group" title="You and I Are Polar Opposites Season 2">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1784095816/6391.jpg" alt="You and I Are Polar Opposites Season 2" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                8.4
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">You and I Are Polar Opposites Season 2</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">You and I Are Polar Opposites Season 2</p>
+</a>
+                <a href="https://anidb.app/anime/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2-6390" class="anime-card block group" title="Trapped in a Dating Sim: The World of Otome Games is Tough for Mobs 2">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1783663815/6390.jpg" alt="Trapped in a Dating Sim: The World of Otome Games is Tough for Mobs 2" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">TV</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                6.7
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">Trapped in a Dating Sim: The World of Otome Games is Tough for Mobs 2</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">Trapped in a Dating Sim: The World of Otome Games is Tough for Mobs 2</p>
+</a>
+                <a href="https://anidb.app/anime/that-time-i-got-reincarnated-as-a-slime-the-movie-tears-of-the-azure-sea-5239" class="anime-card block group" title="That Time I Got Reincarnated as a Slime the Movie: Tears of the Azure Sea">
+    <div class="relative overflow-hidden rounded-xl bg-elevated" style="aspect-ratio:2/3">
+                <img src="https://cdn.xlsbox.com/poster/small/1785478211/5239.jpg" alt="That Time I Got Reincarnated as a Slime the Movie: Tears of the Azure Sea" loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             onerror="this.onerror=null;this.src='/img/placeholder.svg'">
+        
+        <div class="absolute inset-x-0 top-0 h-14 pointer-events-none" style="background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)"></div>
+        <div class="absolute top-1.5 left-1.5 right-1.5 flex justify-between items-start pointer-events-none">
+                        <span class="badge badge-orange text-[9px]" style="background:rgba(249,115,22,.85);color:#fff">Movie</span>
+                                    <span class="badge badge-gray flex items-center gap-0.5 text-[9px]" style="background:rgba(0,0,0,.7);color:#e5e5e5">
+                <svg class="w-2.5 h-2.5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                7.1
+            </span>
+                    </div>
+
+        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent flex flex-col justify-end p-2.5 pointer-events-none">
+            <p class="text-xs font-semibold text-white line-clamp-2 leading-tight">That Time I Got Reincarnated as a Slime the Movie: Tears of the Azure Sea</p>
+        </div>
+    </div>
+    <p class="text-xs text-faint mt-1.5 line-clamp-2 leading-tight">That Time I Got Reincarnated as a Slime the Movie: Tears of the Azure Sea</p>
+</a>
+            </div>
+
+    
+        <div class="flex items-center justify-center gap-4 mt-10">
+                <span class="btn-secondary text-sm px-5 py-2 opacity-40 cursor-not-allowed">← Prev</span>
+                <span class="text-sm text-muted">Page <span class="text-white font-semibold">1</span> of <span class="text-white font-semibold">229</span></span>
+                <a href="https://anidb.app/browse?keyword=naruto&amp;page=2" class="btn-secondary text-sm px-5 py-2">Next →</a>
+            </div>
+    
+    
+</div>
+
+</main>
+
+<footer class="border-t border-bd bg-card mt-16">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-12">
+
+        
+        <div class="mb-10 pb-10 border-b border-bd">
+            <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center px-1.5 h-5 rounded bg-orange/15 text-orange text-[10px] font-extrabold whitespace-nowrap">A–Z</span>
+                    Anime List
+                </h4>
+                <a href="/az" class="text-xs text-orange hover:opacity-80 transition-opacity font-medium">Browse all →</a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-1">
+                                                <a href="/az"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    All
+                </a>
+                                <a href="/az?letter=0-9"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    0-9
+                </a>
+                                <a href="/az?letter=A"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    A
+                </a>
+                                <a href="/az?letter=B"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    B
+                </a>
+                                <a href="/az?letter=C"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    C
+                </a>
+                                <a href="/az?letter=D"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    D
+                </a>
+                                <a href="/az?letter=E"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    E
+                </a>
+                                <a href="/az?letter=F"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    F
+                </a>
+                                <a href="/az?letter=G"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    G
+                </a>
+                                <a href="/az?letter=H"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    H
+                </a>
+                                <a href="/az?letter=I"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    I
+                </a>
+                                <a href="/az?letter=J"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    J
+                </a>
+                                <a href="/az?letter=K"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    K
+                </a>
+                                <a href="/az?letter=L"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    L
+                </a>
+                                <a href="/az?letter=M"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    M
+                </a>
+                                <a href="/az?letter=N"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    N
+                </a>
+                                <a href="/az?letter=O"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    O
+                </a>
+                                <a href="/az?letter=P"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    P
+                </a>
+                                <a href="/az?letter=Q"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    Q
+                </a>
+                                <a href="/az?letter=R"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    R
+                </a>
+                                <a href="/az?letter=S"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    S
+                </a>
+                                <a href="/az?letter=T"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    T
+                </a>
+                                <a href="/az?letter=U"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    U
+                </a>
+                                <a href="/az?letter=V"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    V
+                </a>
+                                <a href="/az?letter=W"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    W
+                </a>
+                                <a href="/az?letter=X"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    X
+                </a>
+                                <a href="/az?letter=Y"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    Y
+                </a>
+                                <a href="/az?letter=Z"
+                   class="flex items-center justify-center min-w-[2rem] h-8 px-2 rounded-lg bg-elevated border border-bd text-xs font-bold text-muted hover:border-orange/50 hover:text-orange hover:bg-orange/5 transition-colors">
+                    Z
+                </a>
+                            </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
+            <div class="col-span-2 sm:col-span-3 lg:col-span-1">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="https://anidb.app/images/fav-512.png" alt="AniDB" class="w-7 h-7 rounded-lg">
+                    <span class="text-base font-bold">AniDB</span>
+                </div>
+                <p class="text-sm text-muted leading-relaxed">Your ultimate destination for anime streaming. Watch thousands of series and movies in HD, sub and dub.</p>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Explore</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/home" class="text-sm text-muted hover:text-orange transition-colors">Home</a></li>
+                    <li><a href="/browse" class="text-sm text-muted hover:text-orange transition-colors">Browse All</a></li>
+                    <li><a href="/schedule" class="text-sm text-muted hover:text-orange transition-colors">Airing Schedule</a></li>
+                    <li><a href="/browse?sort=order_top_airing&status=Currently+Airing" class="text-sm text-muted hover:text-orange transition-colors">Currently Airing</a></li>
+                    <li><a href="/browse?sort=order_popular" class="text-sm text-muted hover:text-orange transition-colors">Most Popular</a></li>
+                    <li><a href="/browse?sort=order_updated" class="text-sm text-muted hover:text-orange transition-colors">Latest Updates</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Types</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/browse?type=TV" class="text-sm text-muted hover:text-orange transition-colors">TV Series</a></li>
+                    <li><a href="/browse?type=Movie" class="text-sm text-muted hover:text-orange transition-colors">Movies</a></li>
+                    <li><a href="/browse?type=OVA" class="text-sm text-muted hover:text-orange transition-colors">OVA</a></li>
+                    <li><a href="/browse?type=ONA" class="text-sm text-muted hover:text-orange transition-colors">ONA</a></li>
+                    <li><a href="/browse?type=Special" class="text-sm text-muted hover:text-orange transition-colors">Specials</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Genres</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/browse?genres=1" class="text-sm text-muted hover:text-orange transition-colors">Action</a></li>
+                    <li><a href="/browse?genres=2" class="text-sm text-muted hover:text-orange transition-colors">Adventure</a></li>
+                    <li><a href="/browse?genres=3" class="text-sm text-muted hover:text-orange transition-colors">Comedy</a></li>
+                    <li><a href="/browse?genres=4" class="text-sm text-muted hover:text-orange transition-colors">Drama</a></li>
+                    <li><a href="/genres" class="text-sm text-orange font-medium hover:opacity-80 transition-opacity">All genres →</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Browse By</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/az" class="text-sm text-muted hover:text-orange transition-colors">A–Z List</a></li>
+                    <li><a href="/themes" class="text-sm text-muted hover:text-orange transition-colors">Themes</a></li>
+                    <li><a href="/demographics" class="text-sm text-muted hover:text-orange transition-colors">Demographics</a></li>
+                    <li><a href="/studios" class="text-sm text-muted hover:text-orange transition-colors">Studios</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-bd pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-muted">© 2026 AniDB. Watch anime online free in HD.</p>
+            <p class="text-xs text-muted">For entertainment purposes only.</p>
+        </div>
+    </div>
+</footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a25308c87979052f',t:'MTc4NTczNjExNg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"5d4c848976e341eca3a1ddb2357f8ffc"}' crossorigin="anonymous"></script>
+</body>
+</html>
