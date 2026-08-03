@@ -1,5 +1,5 @@
 # 🚀 AniDB Video Scraper API & Stream Extractor
-
+** NOTE : If the proxy isn't working find one yourself, If my proxy getting rate limit host one yourself [streamrelay](https://github.com/Varomine/streamrelay)**
 High-performance, edge-ready RESTful Video Scraper API and Stream Extractor for `https://anidb.app/`. Built for global edge deployment on **Cloudflare Workers** and **Node.js**.
 
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
