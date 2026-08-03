@@ -156,22 +156,6 @@ npx wrangler login
 npm run deploy
 ```
 
----
-
-## 🐙 GitHub Deployment
-
-Push your repository to [`https://github.com/Varomine/Anidb-api`](https://github.com/Varomine/Anidb-api):
-
-```bash
-git init
-git add .
-git commit -m "Deploy AniDB Scraper API to Cloudflare Workers & GitHub"
-git branch -M main
-git remote add origin https://github.com/Varomine/Anidb-api.git
-git push -u origin main
-```
-
----
 
 ## 📄 License
 MIT License
